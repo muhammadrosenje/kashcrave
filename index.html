@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>KashCrave | Nigerian Food Delivery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+
+    <!-- ============ NAVBAR ============ -->
+    <nav>
+        <a href="#home" class="logo-brand">
+            <div class="logo-img"><img src="assets/logo.jpeg" alt=""></div>
+            KashCrave
+        </a>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#about">Why Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <button class="cart-icon" onclick="goCart()" aria-label="Shopping Cart">
+                <i class="fa-solid fa-cart-shopping fa-xl"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+            <button class="order-btn" onclick="openModal()">Order Now</button>
+            <button class="hamburger" onclick="toggleMenu(this)">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <div class="mobile-nav" id="mobileNav">
+            <a href="#home" onclick="closeMobileMenu()">Home</a>
+            <a href="#menu" onclick="closeMobileMenu()">Menu</a>
+            <a href="#about" onclick="closeMobileMenu()">Why Us</a>
+            <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+        </div>
+    </nav>
+
+    <!-- ============ HERO SECTION ============ -->
+    <section class="hero" id="home">
+        <div class="hero-text">
+            <small>FRESH • TASTY • ALWAYS HOT</small>
+            <h1>Good Food<br><span>Hits Different.</span></h1>
+
+            <p>
+                At KashCrave, we serve authentic Nigerian meals prepared fresh daily.
+                From aromatic Jollof rice to hearty soups and perfectly seasoned proteins,
+                satisfaction is guaranteed!
+            </p>
+
+            <div class="hero-bottom">
+                <button class="hero-btn" onclick="scrollMenu()">Order Now →</button>
+
+                <div class="delivery">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <span><b>Fast Delivery</b><br>Fresh & Hot</span>
+                </div>
+            </div>
+        </div>
+
+        <img class="hero-image" src="images/burger-hero.jpg"
+            alt="Delicious Nigerian Jollof rice with chicken and vegetables">
+    </section>
+
+    <!-- ============ MENU SECTION ============ -->
+    <section class="menu-section" id="menu">
+
+        <div class="heading">
+            <div class="heading-text">
+                <span class="section-label">OUR MENU</span>
+                <h2>Nigerian Dishes</h2>
+                <p>Authentic recipes. Fresh ingredients. Pure satisfaction.</p>
+            </div>
+
+            <input class="search" id="search" placeholder="Search meals..." oninput="searchFood()">
+        </div>
+
+        <div class="filters">
+            <button class="filter active" onclick="filterFood('All',this)">All</button>
+            <button class="filter" onclick="filterFood('Rice',this)">Rice</button>
+            <button class="filter" onclick="filterFood('Soups',this)">Soups</button>
+            <button class="filter" onclick="filterFood('Proteins',this)">Proteins</button>
+            <button class="filter" onclick="filterFood('Sides',this)">Sides</button>
+            <button class="filter" onclick="filterFood('Drinks',this)">Drinks</button>
+        </div>
+
+        <div class="menu-layout">
+
+            <!-- FOOD CARDS -->
+            <div class="food-grid" id="foodGrid">
+
+                <!-- RICE DISHES -->
+                <div class="card" data-category="Rice" data-name="Jollof Rice & Chicken">
+                    <img src="images/jollof-rice-chicken.jpg" alt="Aromatic Jollof rice with tender chicken">
+                    <div class="card-info">
+                        <h3>Jollof Rice & Chicken</h3>
+                        <p>Aromatic rice with perfectly cooked chicken</p>
+                        <span class="price">₦3,500</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Jollof Rice & Chicken',3500)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="Rice" data-name="Fried Rice & Chicken">
+                    <img src="images/fried-rice-chicken.jpg" alt="Golden fried rice with chicken and vegetables">
+                    <div class="card-info">
+                        <h3>Fried Rice & Chicken</h3>
+                        <p>Golden rice with mixed vegetables & chicken</p>
+                        <span class="price">₦3,200</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Fried Rice & Chicken',3200)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="Rice" data-name="Party Jollof Rice">
+                    <img src="images/party-jollof.jpg" alt="Premium party style jollof rice with meat">
+                    <div class="card-info">
+                        <h3>Party Jollof Rice</h3>
+                        <p>Premium jollof with beef and special spices</p>
+                        <span class="price">₦4,500</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Party Jollof Rice',4500)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="Rice" data-name="Beef Jollof Rice">
+                    <img src="images/beef-jollof-rice.jpg" alt="Delicious jollof rice with tender beef">
+                    <div class="card-info">
+                        <h3>Beef Jollof Rice</h3>
+                        <p>Jollof rice with tender, juicy beef</p>
+                        <span class="price">₦4,000</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Beef Jollof Rice',4000)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SOUPS -->
+                <div class="card" data-category="Soups" data-name="Pepper Soup">
+                    <img src="images/pepper-soup.jpg" alt="Hot aromatic pepper soup with meat">
+                    <div class="card-info">
+                        <h3>Pepper Soup</h3>
+                        <p>Spicy broth with meat, properly seasoned</p>
+                        <span class="price">₦2,000</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Pepper Soup',2000)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="Soups" data-name="Egusi Soup">
+                    <img src="images/egusi-soup.jpg" alt="Traditional egusi soup with vegetables">
+                    <div class="card-info">
+                        <h3>Egusi Soup</h3>
+                        <p>Traditional melon seed soup with vegetables</p>
+                        <span class="price">₦2,500</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Egusi Soup',2500)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="Soups" data-name="Tomato Soup">
+                    <img src="images/tomato-soup.jpg" alt="Rich creamy tomato soup">
+                    <div class="card-info">
+                        <h3>Tomato Soup</h3>
+                        <p>Rich tomato-based soup with meat & veggies</p>
+                        <span class="price">₦2,200</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Tomato Soup',2200)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="Soups" data-name="Vegetable Soup">
+                    <img src="images/vegetable-soup.jpg" alt="Nutritious vegetable soup with greens">
+                    <div class="card-info">
+                        <h3>Vegetable Soup</h3>
+                        <p>Nutritious with fresh greens & vegetables</p>
+                        <span class="price">₦1,800</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Vegetable Soup',1800)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROTEINS -->
+                <div class="card" data-category="Proteins" data-name="Grilled Chicken">
+                    <img src="images/grilled-chicken.jpg" alt="Juicy grilled chicken breast">
+                    <div class="card-info">
+                        <h3>Grilled Chicken</h3>
+                        <p>Tender herb-seasoned grilled chicken</p>
+                        <span class="price">₦3,500</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Grilled Chicken',3500)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="Proteins" data-name="Peppered Chicken">
+                    <img src="images/peppered-chicken.jpg" alt="Spicy peppered chicken">
+                    <div class="card-info">
+                        <h3>Peppered Chicken</h3>
+                        <p>Spicy chicken with pepper sauce & spices</p>
+                        <span class="price">₦3,200</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Peppered Chicken',3200)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="Proteins" data-name="Suya (Grilled Meat)">
+                    <img src="images/suya.jpg" alt="Traditional suya grilled meat">
+                    <div class="card-info">
+                        <h3>Suya (Grilled Meat)</h3>
+                        <p>Grilled beef with spicy peanut coating</p>
+                        <span class="price">₦3,000</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Suya (Grilled Meat)',3000)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="Proteins" data-name="Fish & Chips">
+                    <img src="images/fish-chips.jpg" alt="Crispy fish and golden chips">
+                    <div class="card-info">
+                        <h3>Fish & Chips</h3>
+                        <p>Crispy battered fish with golden fries</p>
+                        <span class="price">₦3,800</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Fish & Chips',3800)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIDES -->
+                <div class="card" data-category="Sides" data-name="Moi Moi">
+                    <img src="images/moi-moi.jpg" alt="Traditional steamed moi moi pudding">
+                    <div class="card-info">
+                        <h3>Moi Moi</h3>
+                        <p>Steamed bean pudding, soft & filling</p>
+                        <span class="price">₦1,500</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Moi Moi',1500)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="Sides" data-name="Coleslaw">
+                    <img src="images/coleslaw.jpg" alt="Fresh crunchy coleslaw">
+                    <div class="card-info">
+                        <h3>Coleslaw</h3>
+                        <p>Fresh crunchy cabbage coleslaw salad</p>
+                        <span class="price">₦1,000</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Coleslaw',1000)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="Sides" data-name="Fried Plantain">
+                    <img src="images/fried-plantain.jpg" alt="Golden fried plantain slices">
+                    <div class="card-info">
+                        <h3>Fried Plantain</h3>
+                        <p>Golden fried ripe plantain slices</p>
+                        <span class="price">₦1,200</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Fried Plantain',1200)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="Sides" data-name="French Fries">
+                    <img src="images/french-fries.jpg" alt="Crispy golden french fries">
+                    <div class="card-info">
+                        <h3>French Fries</h3>
+                        <p>Perfectly fried golden potato sticks</p>
+                        <span class="price">₦1,000</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'French Fries',1000)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DRINKS -->
+                <div class="card" data-category="Drinks" data-name="Coca-Cola">
+                    <img src="images/coke.jpg" alt="Ice-cold Coca-Cola bottle">
+                    <div class="card-info">
+                        <h3>Coca-Cola</h3>
+                        <p>Ice-cold refreshing cola drink</p>
+                        <span class="price">₦800</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Coca-Cola',800)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="Drinks" data-name="Fanta">
+                    <img src="images/fanta.jpg" alt="Colorful fruity fanta drink">
+                    <div class="card-info">
+                        <h3>Fanta</h3>
+                        <p>Fruity refreshing carbonated drink</p>
+                        <span class="price">₦800</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Fanta',800)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="Drinks" data-name="Pure Water">
+                    <img src="images/water.jpg" alt="Bottle of pure mineral water">
+                    <div class="card-info">
+                        <h3>Pure Water</h3>
+                        <p>Pure mineral water, stay hydrated</p>
+                        <span class="price">₦500</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Pure Water',500)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-category="Drinks" data-name="Zobo (Hibiscus)">
+                    <img src="images/zobo.jpg" alt="Refreshing red zobo hibiscus drink">
+                    <div class="card-info">
+                        <h3>Zobo (Hibiscus)</h3>
+                        <p>Traditional Nigerian hibiscus drink</p>
+                        <span class="price">₦1,000</span>
+                        <div class="controls">
+                            <button onclick="removeItem(this)">−</button>
+                            <span class="qty">0</span>
+                            <button onclick="addItem(this,'Zobo (Hibiscus)',1000)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CART SIDEBAR -->
+            <div class="cart-wrapper">
+
+                <div class="cart" id="cartBox">
+                    <div class="cart-title">
+                        <h2>Your Cart</h2>
+                        <span>🛍️</span>
+                    </div>
+
+                    <div class="cart-list" id="cartList">
+                        <p class="cart-empty">Your cart is empty</p>
+                    </div>
+
+                    <div class="summary">
+                        <div class="row">
+                            <span>Subtotal</span>
+                            <span id="subtotal">₦0</span>
+                        </div>
+                        <div class="row">
+                            <span>Delivery</span>
+                            <span>₦500</span>
+                        </div>
+                        <div class="row total">
+                            <span>Total</span>
+                            <span id="total">₦0</span>
+                        </div>
+
+                        <button class="checkout" onclick="checkout()">
+                            Checkout →
+                        </button>
+                    </div>
+                </div>
+
+                <div class="offer">
+                    <small>SPECIAL OFFER</small>
+                    <h2>Get 10% Off!</h2>
+                    <p>Use code KASH10 on your first order and enjoy authentic Nigerian meals at great prices!</p>
+                    <span class="offer-code">KASH10</span>
+                    <img src="images/special-offer.jpg" alt="Delicious meal offer">
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section class="features" id="about">
+
+        <div class="feature">
+            <div class="feature-icon">
+                <i class="fa-solid fa-leaf fa-xl"></i>
+            </div>
+            <div>
+                <h3>Fresh Ingredients</h3>
+                <p>Only the best, always</p>
+            </div>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">
+                <i class="fa-solid fa-truck-fast fa-xl"></i>
+            </div>
+            <div>
+                <h3>Fast Delivery</h3>
+                <p>Your food, on time</p>
+            </div>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">
+                <i class="fa-regular fa-clock fa-xl"></i>
+            </div>
+            <div>
+                <h3>Quality Assured</h3>
+                <p>Every meal is perfect</p>
+            </div>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">
+                <i class="fa-solid fa-headset fa-xl"></i>
+            </div>
+            <div>
+                <h3>Best Support</h3>
+                <p>We're here to help</p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer id="contact">
+        <div class="footer-logo"><img src="assets/logo.jpeg" alt=""></div>
+        <p>&copy; 2026 KashCrave. All rights reserved. | You crave it, we make it!</p>
+
+        <div class="socials">
+            <a href="https://www.instagram.com/kashcrave.ng/" target="_blank" rel="noopener noreferrer"
+                title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@kashcrave.ng" target="_blank" rel="noopener noreferrer"
+                title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=2347025049286&text=Hi%20KashCrave!%20I%27d%20like%20to%20place%20an%20order."
+                target="_blank" rel="noopener noreferrer" title="WhatsApp"><i
+                    class="fa-brands fa-whatsapp"></i></a>
+        </div>
+    </footer>
+
+    <!-- ============ MODAL ============ -->
+    <div class="modal" id="modal">
+        <div class="modal-box">
+            <button class="close" onclick="closeModal()">×</button>
+            <h2>Ready to Order?</h2>
+            <p>
+                Browse our delicious Nigerian menu and add your favorite meals to your cart.
+                Fast delivery, fresh food, guaranteed satisfaction!
+            </p>
+            <button class="order-btn" onclick="closeModal();scrollMenu()">
+                View Menu
+            </button>
+        </div>
+    </div>
+
+    <!-- ============ SUCCESS TOAST ============ -->
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
